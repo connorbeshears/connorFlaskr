@@ -1,0 +1,10 @@
+Click     
+Flask          
+itsdangerous   
+Jinja2        
+MarkupSafe    
+pip           
+setuptools   
+waitress       
+Werkzeug     
+wheel        
