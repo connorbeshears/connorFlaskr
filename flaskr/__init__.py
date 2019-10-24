@@ -3,7 +3,7 @@ from flask import Flask
 
 # Copied from the Flask website 
 
-def create_app(test_config=None):
+def create_app(test_config=None, x=None, y=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
