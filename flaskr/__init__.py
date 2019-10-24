@@ -3,41 +3,41 @@ from flask import Flask
 
 # Copied from the Flask website 
 
-def create_app(test_config=None, x=None, y=None):
-    # create and configure the app
-    app = Flask(__name__, instance_relative_config=True)
-    app.config.from_mapping(
+def create_app(test_config=None, x=None):
+    # create and configure the appl
+    appl = Flask(__name__, instance_relative_config=True)
+    appl.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        DATABASE=os.path.join(appl.instance_path, 'flaskr.sqlite'),
     )
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
+        appl.config.from_pyfile('config.py', silent=True)
     else:
         # load the test config if passed in
-        app.config.from_mapping(test_config)
+        appl.config.from_mapping(test_config)
 
     # ensure the instance folder exists
     try:
-        os.makedirs(app.instance_path)
+        os.makedirs(appl.instance_path)
     except OSError:
         pass
 
     # a simple page that says hello
-    @app.route('/hello')
+    @appl.route('/hello')
     def hello():
         return 'Hello, World!'
 
     from . import dbAcc
-    dbAcc.init_app(app)
+    dbAcc.init_app(appl)
 
     from . import auth
-    app.register_blueprint(auth.bp)
+    appl.register_blueprint(auth.bp)
 
     from . import blog
-    app.register_blueprint(blog.bp)
-    app.add_url_rule('/', endpoint='index')
+    appl.register_blueprint(blog.bp)
+    appl.add_url_rule('/', endpoint='index')
 
-    return app
+    return appl
 
